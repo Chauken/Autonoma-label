@@ -17,26 +17,28 @@ def Convert(string):
 
 
 
-path = '/home/martin/Desktop/ShaggyCam4/Lable_Shag4.txt'
+path = 'Lable_Shag4.txt'
 
 str2 = " ("
 
 pattern = re.compile(r"\((\d+)\)")
 
-
 f=open(path,'r+')
-fl =f.readlines()
+fku =f.readlines()
 
-fl_new = []
+fl = [0]*1000
+
+lenku = len(fku)
+
+for u in range(lenku):
+	fl[u*6] = fku[u]
 
 j= 0
-lenFL = len(fl)
-
-for x in range (lenFL):
+for x in range (lenku):
 	#print(x)	
 
 	for i in range (6):
-		fl_temp = fl[x]
+		fl_temp = fl[j]
 
 		fl_temp2_pos = fl_temp.find(")")
 		fl_temp2 = fl_temp[fl_temp2_pos:]
@@ -45,22 +47,21 @@ for x in range (lenFL):
 		list1 = pattern.findall(fl_temp)
 
 		list1 = [int(i) for i in list1]
-		list1[0] = list1[0] + i
-
+		list1[0] = j + i + 1
 		list1 = str(list1)
-
 
 		list1 = list1[1:-1]
 
 		pos_x = fl_temp.find(str2)
-		fl_temp = fl_temp[:pos_x+2] +list1 + fl_temp2+'\n'
+		fl_temp = fl_temp[:pos_x+2] +list1 + fl_temp2
 
-
-		#print(len(fl))
-		fl.insert(len(fl),fl_temp)
+		fl[j + i] = fl_temp
 	
-j=j+6
+	j=j+6
 
+
+while fl[len(fl)-1] == 0:
+	fl.pop()
 
 for x in fl:
 
