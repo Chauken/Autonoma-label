@@ -10,10 +10,6 @@ import cv2
 import os
 from matplotlib import pyplot
 
-def Convert(string): 
-    li = list(string.split(" ")) 
-    return li
-
 
 
 
@@ -25,7 +21,7 @@ pattern = re.compile(r"\((\d+)\)")
 
 f=open(path,'r+')
 fku =f.readlines()
-
+f.close
 fl = [0]*1000
 
 lenku = len(fku)
@@ -63,8 +59,10 @@ for x in range (lenku):
 while fl[len(fl)-1] == 0:
 	fl.pop()
 
-for x in fl:
+f= open("DoneLabel","w+")
 
+for x in fl:
+	f.write(x)
 	print(x)
 
 
